@@ -25,7 +25,7 @@ Prerequisites
 django-linkedinauth requires the following Python libraries to function:
 
     LinkedIn-Client-Library (mgile fork)
-    [https://github.com/mgile/LinkedIn-Client-Library](https://github.com/mgile/LinkedIn-Client-Library)
+[https://github.com/mgile/LinkedIn-Client-Library](https://github.com/mgile/LinkedIn-Client-Library)
     
 Note that this module requires a fork of the official LinkedIn-Client-Library
 to enable the exchange of JSAPI bearer tokens.  This is a convenience feature
