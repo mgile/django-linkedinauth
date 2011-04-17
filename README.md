@@ -5,12 +5,12 @@ A simple Django project to allow user authentication and profile mapping via the
 
 The linkedin_auth module provides the following features:
 
-    - Authentication Backend
-    - Context Processor
-    - Abstract Django User Profile Model
-    - View function to exchange bearer tokens
-    - View function to logout a LinkedIn profile
-    - A set of convenience Javascript functions (Coming Soon)
+- Authentication Backend
+- Context Processor
+- Abstract Django User Profile Model
+- View function to exchange bearer tokens
+- View function to logout a LinkedIn profile
+- A set of convenience Javascript functions (Coming Soon)
     
 Included is a sample Django project that creates a simple website that will
 allow login via the LinkedIn sign-in button, and execute a redirect to the
