@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>{% block title %}Example{% endblock %} | django-linkedinauth</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" media="all" type="text/css" href="{{ STATIC_URL }}css/stacklayout.css" />
+        <!--[if lte IE 7]>
+        <link rel="stylesheet" media="all" type="text/css" href="{{ STATIC_URL }}css/stacklayout_lte_ie7.css" />
+        <![endif]-->
+        <link rel="stylesheet" media="all" type="text/css" href="{{ STATIC_URL }}css/liskin.css" />
+        <link rel="stylesheet" media="handheld, only screen and (max-width: 767px)" type="text/css" href="{{ STATIC_URL }}css/limobile.css" />
+        <link type="text/css" href="{{ STATIC_URL }}css/start/jquery-ui-1.8.11.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.5.2.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.11.custom.min.js"></script>
+		
+		{% if LINKEDIN_API_KEY %}
+		<script type="text/javascript" src="https://platform.linkedin.com/in.js">
+		  api_key: {{ LINKEDIN_API_KEY }}
+		  credentials_cookie: true
+		  authorize: true
+		</script>
+
+        {% if not request.user.is_authenticated %}
+        <script type="text/javascript">IN.Event.onOnce(IN, 'auth', function () { location.href = '{% url bearer_exchange_view %}';}, null, null);</script>
+        {% endif %}
+        <script type="text/javascript">IN.Event.onOnce(IN, 'logout', function() {alert("Logging Out"); location.href = '{% url linkedin_logout_view %}';}, null, null);</script>
+        <script type="text/javascript">
+            IN.Event.onOnce(
+                IN,
+                'systemReady',
+                function() {
+                    {% block extraLinkedInReadyCode %}{% endblock %}
+                },
+                null,
+                null
+            );
+        </script>
+        
+        {% endif %}
+		
+		{% block extrahead %}{% endblock %}
+    </head>
+    <body id="linkedin_auth_example">
+        <div id="page">
+            <div class="stack">
+                <div id="header">
+                    {% block header %}
+                    <h1 id="title" class="stackContent"><a href="/"></a>django-linkedinauth example project</h1>
+                    <ul id="nav" class="stackContent">
+                        <li {% block nav-home-class %}class="active"{% endblock %}><a href="/">Home</a></li>
+                        
+                        {% if request.user.is_authenticated %}
+                        <li {% block nav-profile-class %}{% endblock %}><a href="/accounts/profile/">My Profile</a></li>
+                        <li {% block nav-connections-class %}{% endblock %}><a href="/accounts/profile/connections/">My Connections</a></li>
+                        <li><a href="#" onclick="IN.User.logout(function(){}, null);">Logout</a></li>                        
+                        {% endif %}
+                        <li {% block nav-loginlogout-class %}{% endblock %}><script type="in/Login"></script></li>
+                    </ul>
+                    {% endblock %}
+                    {% block extraheader %}{% endblock %}
+                </div>
+                <div id="content">
+                    {% block content %}
+                    <div id="column1" class="stack3of4">
+                        <div class="stackContent">
+                            <h2>Explain Project Here...</h2>
+                            <p>Put LinkedIn Sign-In Button Here...</p>
+                        </div>
+                    </div>
+                    {% endblock %}
+                </div>
+                <div id="footer">
+                    {% block footer %}
+                    <div class="wrapper">
+                        <div class="stackAuto">
+                            <p class="stackContent">&copy; 2011 Michael Gile</p>
+                        </div>
+                        <div class="stackAuto">
+                            <a id="twitter" class="stackContent" href="http://twitter.com/mgile">Follow me on Twitter</a>
+                        </div>
+                    {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

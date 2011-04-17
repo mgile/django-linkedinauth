@@ -1,0 +1,23 @@
+{% extends "libase.html" %}
+{% load i18n %}
+{% load url from future %}
+
+
+{% block nav-home-class %}{% endblock %}
+{% block nav-profile-class %}{% endblock %}
+{% block nav-loginlogout-class %}class="active"{% endblock %}
+
+{% block content %}
+<div id="column1" class="stack3of4">
+    <div class="stackContent">
+        {% if exchange_error %}
+        <p><strong>{{ exchange_error }}</strong></p>
+        {% endif %}
+
+        <p>Please sign-in using the LinkedIn button below:</p><br/>
+        <script type="IN/Login">
+          Hello, <?js= firstName ?> <?js= lastName ?>.
+        </script>
+    </div>
+</div>
+{% endblock %}

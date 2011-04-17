@@ -1,0 +1,32 @@
+{% extends "libase.html" %}
+{% load i18n %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block nav-home-class %}{% endblock %}
+{% block nav-profile-class %}class="active"{% endblock %}
+{% block nav-connections-class %}{% endblock %}
+{% block nav-loginlogout-class %}{% endblock %}
+
+{% block extraLinkedInReadyCode %}
+IN.API.Profile("me")
+   .result(function(result) { 
+      $("#li_profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
+      IN.parse(document.getElementById("li_profile"))
+      $("#loading").hide();
+   })
+{% endblock %}
+
+{% block content %}
+<div id="column1" class="stack1of1">
+    <div class="stackContent">
+        <h3>My Profile</h3>
+    </div>
+    <div class="stackContent">
+        <p id="loading">Loading Profile...</p>
+        <div id="li_profile"></div>
+    </div>
+</div>
+{% endblock %}
+
+

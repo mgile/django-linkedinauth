@@ -26,7 +26,7 @@ django-linkedinauth requires the following Python libraries to function:
 
     LinkedIn-Client-Library (mgile fork)
     
-    https://github.com/mgile/LinkedIn-Client-Library
+https://github.com/mgile/LinkedIn-Client-Library
     
 Note that this module requires a fork of the official LinkedIn-Client-Library
 to enable the exchange of JSAPI bearer tokens.  This is a convenience feature
@@ -56,11 +56,11 @@ To install, execute the following from within the django-linkedinauth directory:
 settings.py
 -----------
 
-Add the following to your TEMPLATE_CONTEXT_PROCESSORS entry:
+Add the following to your TEMPLATE_CONTEXT_PROCESSORS:
     
     'linkedin_auth.context_processors.linkedin',
     
-Add the following to INSTALLED_APPS
+Add the following to INSTALLED_APPS:
     
     'linkedin_auth',
     
@@ -97,9 +97,9 @@ Django application that maps to a LinkedIn account. Note that
 your model must subclass LinkedInProfileModel, or you must 
 include all of the same fields in the LinkedInProfileModel.
 
-from django.db import models
-from django.contrib.auth.models import User
-from linkedin_auth.models import LinkedInProfileModel
+    from django.db import models
+    from django.contrib.auth.models import User
+    from linkedin_auth.models import LinkedInProfileModel
 
     class ExampleUserProfile(LinkedInProfileModel):
         user        = models.OneToOneField(User)
@@ -158,7 +158,7 @@ Without this you will be unable to login via LinkedIn.
 To run the Django webserver, you must also fake HTTPS support so that calls to request.is_secure()
 return True.  To do this, execute the following from the command line:
 
-    HTTPS =1 python manage.py runserver
+    HTTPS=1 python manage.py runserver
 
 
 Contributors

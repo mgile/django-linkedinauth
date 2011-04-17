@@ -1,0 +1,72 @@
+{% extends "libase.html" %}
+{% load i18n %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block nav-home-class %}{% endblock %}
+{% block nav-profile-class %}{% endblock %}
+{% block nav-connections-class %}class="active"{% endblock %}
+{% block nav-loginlogout-class %}{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript">
+function displayConnection(publicProfileURL) {
+    var connectionsDiv  = document.getElementById('li_connections');
+    var markup          = '<div class="stack1of2">' + 
+                          '<div class="stackContent">' +
+                          '<div class="liconnection" id="connection_"' + publicProfileURL + '">' +
+                          '<' + 'script type="IN/MemberProfile" data-id="' + publicProfileURL + '" data-format="inline"></script' + '>' +
+                          '</div><br/>' +
+                          '</div>';
+                          
+                           
+                
+    connectionsDiv.innerHTML += markup;     
+}
+</script>
+{% endblock %}
+
+{% block extraLinkedInReadyCode %}
+
+IN.API.Connections("me")
+.fields(["publicProfileUrl"])
+.params({"count":10})
+.result(function(result) {
+  for (var index in result.values) {
+      profile = result.values[index]
+      if (profile.publicProfileUrl) {
+          displayConnection(profile.publicProfileUrl);
+      }    
+  }
+  
+  IN.parse(document.getElementById('li_connections'));
+  
+  $("#loading").hide();
+});
+{% endblock %}
+
+{% block content %}
+<div id="column1" class="stack3of4">
+    <div class="stackContent">
+        <h3>Welcome <script type="text/javascript"><?js= firstName ?> <?js= lastName ?></script></h3>
+        <p>LinkedIn Connections:</p>
+    </div>
+    <div id="loading">
+        <div class="stackContent">
+            <p>Loading Connections...</p>
+        </div>
+    </div>
+    <div id="li_connections"></div>
+</div>
+<div id="column2" class="stack1of4">
+    <div class="stackContent">
+        <h3>Member Profile</h3>
+        <p><img src="{{ request.user.get_profile.picture_url }}" /></p>
+        <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+        <p>ID: {{ request.user.get_profile.member_id }}</p>
+        <p>{{ request.user.get_profile.headline }}</p>
+    </div>
+</div>
+{% endblock %}
+
+

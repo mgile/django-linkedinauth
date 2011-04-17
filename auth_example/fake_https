@@ -1,0 +1,12 @@
+pid=
+
+cert = /usr/local/etc/stunnel/stunnel.pem
+sslVersion = SSLv3
+foreground=yes
+debug = 7
+output = stunnel.log
+
+[https]
+accept=8443
+connect=8000
+TIMEOUTclose=1
