@@ -154,6 +154,11 @@ tunnel from port 8443 to port 8000 (the default runserver port).  Essentially:
     
 Without this you will be unable to login via LinkedIn.
 
+To run stunnel, simply install stunnel from [stunnel](http://www.stunnel.org/?page=downloads) and
+then execute the following from the command line:
+
+    stunnel fake_https
+
 To run the Django webserver, you must also fake HTTPS support so that calls to request.is_secure()
 return True.  To do this, execute the following from the command line:
 
