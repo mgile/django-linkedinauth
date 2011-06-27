@@ -31,6 +31,5 @@ def bearer_exchange_view(request):
 def linkedin_logout_view(request):
     logout(request)
     response = redirect(settings.LOGOUT_REDIRECT_URL)
-    response.delete_cookie()
     return HttpResponseRedirect(settings.LOGOUT_REDIRECT_URL)
 ## END linkedin_logout_view
