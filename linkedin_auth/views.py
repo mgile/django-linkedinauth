@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from django.contrib.auth import authenticate, login, logout
 
@@ -30,5 +30,7 @@ def bearer_exchange_view(request):
 
 def linkedin_logout_view(request):
     logout(request)
+    response = redirect(settings.LOGOUT_REDIRECT_URL)
+    response.delete_cookie()
     return HttpResponseRedirect(settings.LOGOUT_REDIRECT_URL)
 ## END linkedin_logout_view
